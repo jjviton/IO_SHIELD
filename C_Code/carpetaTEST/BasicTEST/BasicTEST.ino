@@ -9,10 +9,16 @@
 
 */
 
+
+
+
 #define RED_LED     10
 #define GREEN_LED   11
-#define SW01        02
-#define SW02        03
+#define SW01        2
+#define SW02        3
+#define buzzer      9
+#define POTENCIOMETRO 0
+#define LDR         1
 
 
 
@@ -24,16 +30,28 @@ void setup() {
   pinMode(GREEN_LED, OUTPUT);
   pinMode(SW01, INPUT);
   pinMode(SW02, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(POTENCIOMETRO, INPUT);
+
+  buzzerTEST();
+
+  Serial.begin(9600);
+  
 }
 
 
 void LED_Test(void){
-  digitalWrite(RED_LED, HIGH);   // turn the LED on (HIGH is the voltage level)
-  digitalWrite(GREEN_LED, LOW);
-  delay(400);                       // wait for a second
-  digitalWrite(RED_LED, LOW);    // turn the LED off by making the voltage LOW
-  digitalWrite(GREEN_LED, HIGH);
-  delay(1000);   
+
+  byte i;
+
+  for(i=0;i<6;i++){
+        digitalWrite(RED_LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+        digitalWrite(GREEN_LED, LOW);
+        delay(400);                       // wait for a second
+        digitalWrite(RED_LED, LOW);    // turn the LED off by making the voltage LOW
+        digitalWrite(GREEN_LED, HIGH);
+        delay(1000);   
+  }
 }//LED_Test FIN
 
 
@@ -50,12 +68,40 @@ void Pushbotton_Test(){
   } 
 } // PushBotton (FIN)
 
+void buzzerTEST(){
+  byte i;
+
+  for(i=0;i<2;i++){
+      digitalWrite(buzzer, HIGH);
+      delay(100);
+      digitalWrite(buzzer, LOW);
+      delay(100);
+  } 
+}// buzzerTEST (fin)
+
+int poteciometroTEST(void){
+  byte dato;
+  dato = analogRead(POTENCIOMETRO); 
+  Serial.println(dato, HEX); 
+}//poteciometroTEST FIN
+
+
+int ldrTEST(void){
+  byte dato;
+  dato = analogRead(LDR); 
+  Serial.println(dato, HEX);
+  delay(400); 
+}//ldrTEST FIN
 
 
 // the loop function runs over and over again forever
 void loop() {
+  //Pushbotton_Test();
+  //buzzerTEST();
+  //LED_Test();
+  //poteciometroTEST();
+  ldrTEST();
 
-  LED_Test();
-  Pushbotton_Test();
+  while(0);
                     
 }// loop_FIN
