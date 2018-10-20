@@ -19,11 +19,13 @@
 #define buzzer      9
 #define POTENCIOMETRO 0
 #define LDR         1
+#define POTENCIA_5  5
+#define POTENCIA_6  6
 
 
-
-
-// the setup function runs2once when you press reset or power the board
+///////////////////////////////////////////////////////////////////////
+// the setup function runs once when you press reset or power the board
+///////////////////////////////////////////////////////////////////////
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(RED_LED, OUTPUT);
@@ -32,14 +34,16 @@ void setup() {
   pinMode(SW02, INPUT);
   pinMode(buzzer, OUTPUT);
   pinMode(POTENCIOMETRO, INPUT);
+  pinMode(POTENCIA_5, OUTPUT);
+  pinMode(POTENCIA_6, OUTPUT);
 
   buzzerTEST();
 
   Serial.begin(9600);
   
 }
-
-
+////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para probar los leds de la I/O
 void LED_Test(void){
 
   byte i;
@@ -54,7 +58,8 @@ void LED_Test(void){
   }
 }//LED_Test FIN
 
-
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para probar los pulsadores de la I/O
 void Pushbotton_Test(){
 
   if(digitalRead(SW02)){
@@ -68,10 +73,13 @@ void Pushbotton_Test(){
   } 
 } // PushBotton (FIN)
 
+
+////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para el zumbador de la I/O
 void buzzerTEST(){
   byte i;
 
-  for(i=0;i<2;i++){
+  for(i=0;i<3;i++){
       digitalWrite(buzzer, HIGH);
       delay(100);
       digitalWrite(buzzer, LOW);
@@ -79,6 +87,8 @@ void buzzerTEST(){
   } 
 }// buzzerTEST (fin)
 
+/////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para probar el potenciometro de la I/O
 int poteciometroTEST(void){
   byte dato;
   dato = analogRead(POTENCIOMETRO); 
@@ -86,6 +96,8 @@ int poteciometroTEST(void){
 }//poteciometroTEST FIN
 
 
+////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para probar el LDR de la I/O
 int ldrTEST(void){
   byte dato;
   dato = analogRead(LDR); 
@@ -94,13 +106,33 @@ int ldrTEST(void){
 }//ldrTEST FIN
 
 
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// Funcion para probar la etapa de Potencia tipo A de la I/O
+int potenciaTEST(void){
+  byte dato,i;
+
+  for(i=0;i<250;i+=2){
+    analogWrite(POTENCIA_5,i);
+    analogWrite(POTENCIA_6,(250-i));
+    delay(100);
+    
+  }
+  /*dato = analogRead(LDR); 
+  Serial.println(dato, HEX);*/
+   
+}//ldrTEST FIN
+
+/////////////////////////////////////////////////////
 // the loop function runs over and over again forever
+////////////////////////////////////////////////////
 void loop() {
   //Pushbotton_Test();
   //buzzerTEST();
   //LED_Test();
   //poteciometroTEST();
-  ldrTEST();
+  //ldrTEST();
+  potenciaTEST();
 
   while(0);
                     
