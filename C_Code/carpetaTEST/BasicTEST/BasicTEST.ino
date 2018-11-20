@@ -115,12 +115,11 @@ int potenciaTEST(void){
   for(i=0;i<250;i+=2){
     analogWrite(POTENCIA_5,i);
     analogWrite(POTENCIA_6,(250-i));
+    Serial.println(i, HEX);
     delay(100);
     
   }
-  /*dato = analogRead(LDR); 
-  Serial.println(dato, HEX);*/
-   
+
 }//ldrTEST FIN
 
 /////////////////////////////////////////////////////
