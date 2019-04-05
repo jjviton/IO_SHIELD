@@ -93,7 +93,8 @@ void buzzerTEST(){
 int poteciometroTEST(void){
   int dato;
   dato = analogRead(POTENCIOMETRO); 
-  Serial.println(dato, HEX); 
+  Serial.print(dato, HEX); Serial.print("   ");
+  Serial.println(dato, DEC); 
 }//poteciometroTEST FIN
 
 
