@@ -12,8 +12,8 @@
 
 
 
-#define RED_LED     10
-#define GREEN_LED   11
+#define RED_LED     11
+#define GREEN_LED   10
 #define SW01        2
 #define SW02        3
 #define buzzer      9
@@ -89,8 +89,9 @@ void buzzerTEST(){
 
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////// Funcion para probar el potenciometro de la I/O
+//////////////////////The default analogRead() resolution for these boards is 10 bits
 int poteciometroTEST(void){
-  byte dato;
+  int dato;
   dato = analogRead(POTENCIOMETRO); 
   Serial.println(dato, HEX); 
 }//poteciometroTEST FIN
@@ -129,9 +130,9 @@ void loop() {
   //Pushbotton_Test();
   //buzzerTEST();
   //LED_Test();
-  //poteciometroTEST();
+  poteciometroTEST();
   //ldrTEST();
-  potenciaTEST();
+  //potenciaTEST();
 
   while(0);
                     
