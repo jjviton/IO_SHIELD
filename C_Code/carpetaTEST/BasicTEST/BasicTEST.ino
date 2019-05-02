@@ -5,12 +5,13 @@
  * Probando el hardware de la placa.
  *    1) LEDs ROJO / GREEN   pin 10 / pin 11
  *    2) PushBotton SW1 SW2  pin 2 / pin 3
+ *    3) Servo 8/ pin 8
  *    
 
 */
 
 
-
+#include <Servo.h>
 
 #define RED_LED     11
 #define GREEN_LED   10
@@ -21,7 +22,10 @@
 #define LDR         1
 #define POTENCIA_5  5
 #define POTENCIA_6  6
+#define pinSERVO    8
 
+
+Servo myservo;
 
 ///////////////////////////////////////////////////////////////////////
 // the setup function runs once when you press reset or power the board
@@ -38,6 +42,8 @@ void setup() {
   pinMode(POTENCIA_6, OUTPUT);
 
   buzzerTEST();
+
+  myservo.attach(pinSERVO);
 
   Serial.begin(9600);
   
@@ -93,8 +99,9 @@ void buzzerTEST(){
 int poteciometroTEST(void){
   int dato;
   dato = analogRead(POTENCIOMETRO); 
+  Serial.print(dato, DEC); Serial.print("   ");
   Serial.print(dato, HEX); Serial.print("   ");
-  Serial.println(dato, DEC); 
+  Serial.println(dato, BIN); 
 }//poteciometroTEST FIN
 
 
@@ -124,6 +131,16 @@ int potenciaTEST(void){
 
 }//ldrTEST FIN
 
+////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// Funcion para probar los leds de la I/O
+void SERVO_Test(void){
+      myservo.write(2);
+      delay(1000);
+      myservo.write(175);  // sets the servo position according to the scaled value
+      delay(1000);
+  
+}//SERVO_Test FIN
+
 /////////////////////////////////////////////////////
 // the loop function runs over and over again forever
 ////////////////////////////////////////////////////
@@ -131,9 +148,10 @@ void loop() {
   //Pushbotton_Test();
   //buzzerTEST();
   //LED_Test();
-  poteciometroTEST();
+  //poteciometroTEST();
   //ldrTEST();
   //potenciaTEST();
+  SERVO_Test();
 
   while(0);
                     
